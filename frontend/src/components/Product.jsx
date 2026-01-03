@@ -9,7 +9,7 @@ const [product, setProduct] = useState(null);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/product/${id}`);
+        const response = await axios.get(`http://localhost:8080/api/products/${id}`);
         setProduct(response.data);
         console.log(response.data);
       } catch (error) {
@@ -19,9 +19,6 @@ const [product, setProduct] = useState(null);
 
     fetchProduct();
   }, [id]);
-
-
-
 
 
   if (!product) {
@@ -40,21 +37,21 @@ const [product, setProduct] = useState(null);
             <span>{product.category}</span>
             <h1>{product.name}</h1>
             <h5>{product.brand}</h5>
-            <p>{product.description}</p>
+            <p>{product.desc}</p>
           </div>
 
           <div className="product-price">
             <span>{"$" + product.price}</span>
             <button
-              className={`cart-btn ${!product.productAvailable ? "disabled-btn" : ""}`}
-              disabled={!product.productAvailable}
+              className={`cart-btn ${!product.availability ? "disabled-btn" : ""}`}
+              disabled={!product.availability}
             >
-              {product.productAvailable ? "Add to cart" : "Out of Stock"}
+              {product.availability ? "Add to cart" : "Out of Stock"}
             </button>
             <h6>
               Stock Available :{" "}
               <i style={{ color: "green", fontWeight: "bold" }}>
-                {product.stockQuantity}
+                {product.quantity}
               </i>
             </h6>
             <p className="release-date">

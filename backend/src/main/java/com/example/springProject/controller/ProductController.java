@@ -3,6 +3,7 @@ package com.example.springProject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,29 +24,29 @@ public class ProductController {
     ProductService service;
 
     @GetMapping("")
-    public List<Product> getProducts(){
-        return service.getProducts();
+    public ResponseEntity<List<Product>> getProducts(){
+        return ResponseEntity.ok(service.getProducts());
     }
 
     @GetMapping("/{prodId}")
-    public Product geProductById(@PathVariable int prodId){
-        return service.getProductById(prodId);
+    public ResponseEntity<Product> getProductById(@PathVariable int prodId){
+        return ResponseEntity.ok(service.getProductById(prodId));
     }
 
     @PostMapping("")
-    public String addProduct(@RequestBody Product product){
+    public ResponseEntity<String> addProduct(@RequestBody Product product){
         service.addProduct(product);
-        return "Product added successfully";
+        return ResponseEntity.ok("Product added successfully");
     }
 
     @PutMapping("/{prodId}")
-    public Product updateProduct(@PathVariable int prodId, @RequestBody Product product){
-        return service.updateProduct(prodId, product);
+    public ResponseEntity<Product> updateProduct(@PathVariable int prodId, @RequestBody Product product){
+        return ResponseEntity.ok(service.updateProduct(prodId, product));
     }
 
     @DeleteMapping("/{prodId}")
-    public String deleteProduct(@PathVariable int prodId){
+    public ResponseEntity<String> deleteProduct(@PathVariable int prodId){
         service.deleteProduct(prodId);
-        return "Product deleted successfully!";
+        return ResponseEntity.ok("Product deleted successfully!");
     }
 }
