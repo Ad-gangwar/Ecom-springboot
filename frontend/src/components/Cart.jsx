@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import AppContext from "../Context/Context";
 import axios from "axios";
-import CheckoutPopup from "./CheckoutPopup.jsx";
+import CheckoutPopup from "./CheckoutPopup";
 import { Button } from 'react-bootstrap';
 
 const Cart = () => {
@@ -13,7 +13,6 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchImagesAndUpdateCart = async () => {
-      console.log("Cart", cart);
       try {
         const response = await axios.get("http://localhost:8080/api/products");
         const backendProductIds = response.data.map((product) => product.id);
@@ -23,7 +22,7 @@ const Cart = () => {
           updatedCartItems.map(async (item) => {
             try {
               const response = await axios.get(
-                `http://localhost:8080/api/product/${item.id}/image`,
+                `http://localhost:8080/api/products/${item.id}/image`,
                 { responseType: "blob" }
               );
               const imageFile = await converUrlToFile(response.data, response.data.imageName);
@@ -108,7 +107,7 @@ const Cart = () => {
         );
   
         await axios
-          .put(`http://localhost:8080/api/product/${item.id}`, cartProduct, {
+          .put(`http://localhost:8080/api/products/${item.id}`, cartProduct, {
             headers: {
               "Content-Type": "multipart/form-data",
             },

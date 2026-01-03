@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 import AppContext from "../Context/Context";
 import axios from "../axios";
-// import UpdateProduct from "./UpdateProduct";
+
 const Product = () => {
   const { id } = useParams();
   const { data, addToCart, removeFromCart, cart, refreshData } =
@@ -52,7 +52,7 @@ const Product = () => {
   };
 
   const handleEditClick = () => {
-    navigate(`/products/update/${id}`);
+    navigate(`/product/update/${id}`);
   };
 
   const handlAddToCart = () => {
@@ -86,9 +86,8 @@ const Product = () => {
           <div className="product-price">
             <span>{"$" + product.price}</span>
             <button
-              className={`cart-btn ${
-                !product.availability ? "disabled-btn" : ""
-              }`}
+              className={`cart-btn ${!product.availability ? "disabled-btn" : ""
+                }`}
               onClick={handlAddToCart}
               disabled={!product.availability}
             >
@@ -97,7 +96,7 @@ const Product = () => {
             <h6>
               Stock Available :{" "}
               <i style={{ color: "green", fontWeight: "bold" }}>
-                {product.quantity}
+                {product.stockQuantity}
               </i>
             </h6>
             <p className="release-date">
@@ -105,7 +104,7 @@ const Product = () => {
               <i> {new Date(product.releaseDate).toLocaleDateString()}</i>
             </p>
           </div>
-          {/* <div className="update-button ">
+          <div className="update-button ">
             <button
               className="btn btn-primary"
               type="button"
@@ -113,7 +112,6 @@ const Product = () => {
             >
               Update
             </button>
-        
             <button
               className="btn btn-primary"
               type="button"
@@ -121,7 +119,7 @@ const Product = () => {
             >
               Delete
             </button>
-          </div> */}
+          </div>
         </div>
       </div>
     </>

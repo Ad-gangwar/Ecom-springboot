@@ -8,7 +8,7 @@ const AddProduct = () => {
     desc: "",
     price: "",
     category: "",
-    quantity: "",
+    stockQuantity: "",
     releaseDate: "",
     availability: false,
   });
@@ -139,10 +139,10 @@ const AddProduct = () => {
             className="form-control"
             placeholder="Stock Remaining"
             onChange={handleInputChange}
-            value={product.quantity}
-            name="quantity"
+            value={product.stockQuantity}
+            name="stockQuantity"
             // value={`${stockAlert}/${stockQuantity}`}
-            id="quantity"
+            id="stockQuantity"
           />
         </div>
         <div className="col-md-4">
